@@ -8,6 +8,7 @@
 - [Overview](#overview)
     - [Introduction](#introduction)
     - [GIF Day 1](#gif-day-1)
+    - [GIF Day 2 - Part 1](#gif-day-2---part-1)
     - [Process](#process)
     - [Built with](#built-with)
 - [Author](#authors)
@@ -16,14 +17,19 @@
 
 ### Introduction
 
-- Actions Handled By Resource Controller
-![alt text](./static/Actions_Handled_By_Resource_Controller.PNG)
-- Installation Via Composer
+- Installation Via Composer \
 ![alt text](./static/Installation_Via_Composer.PNG)
+- Actions Handled By Resource Controller \
+![alt text](./static/Actions_Handled_By_Resource_Controller.PNG)
+- [Artisan Console](https://laravel.com/docs/9.x/artisan)
 
 ### GIF Day 1
 
-![screen-gif](./static/GIF.gif)
+![screen-gif](./static/DAY1.gif)
+
+### GIF Day 2 - Part 1
+
+![screen-gif](./static/DAY2.1.gif)
 
 ### Process
 
@@ -35,7 +41,7 @@
 
 * [PHP](https://www.php.net/)
 * [Laravel](https://laravel.com/)
-
+* [MySQL](https://www.mysql.com/)
 
 ## Authors
 

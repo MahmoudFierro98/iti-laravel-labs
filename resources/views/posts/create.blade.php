@@ -16,10 +16,10 @@
 
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
-        <select name="creator" class="form-control">
-            <option value="Ahmed">Ahmed</option>
-            <option value="Mohamed">Mohamed</option>
-            <option value="Mahmoud">Mahmoud</option>
+        <select name="post_creator" class="form-control">
+            @foreach ($users as $user)
+            <option value="{{ $user->id }}">{{ $user->name }}</option>
+            @endforeach
         </select>
     </div>
     <button type="submit" class="btn btn-success">Create</button>
