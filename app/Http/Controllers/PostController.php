@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         // $posts = Post::all();
-        $posts = post::paginate(15);
+        $posts=post::with('user')->paginate(20);
         return view('posts.index', [
             'posts' => $posts,
         ]);

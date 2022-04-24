@@ -11,6 +11,7 @@
     - [GIF Day 2 - Part 1](#gif-day-2---part-1)
     - [GIF Day 2 - Part 2](#gif-day-2---part-2)
     - [GIF Day 3](#gif-day-3)
+    - [GIF Day 4 API](#gif-day-4-api)
     - [Process](#process)
     - [Built with](#built-with)
 - [Author](#authors)
@@ -40,6 +41,10 @@
 ### GIF Day 3
 
 ![screen-gif](./static/DAY3.gif)
+
+### GIF Day 4 API
+
+![screen-gif](./static/DAY4.api.gif)
 
 ### Process
 
