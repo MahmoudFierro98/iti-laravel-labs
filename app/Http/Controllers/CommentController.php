@@ -9,6 +9,13 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'body' => 'required|string',
+            'commentable_id' => 'required|integer',
+            'commentable_type' => 'required|string',
+        ]);
+
         Comment::create([
             'user_id' => $request->user_id,
             'body' => $request->body,
