@@ -58,8 +58,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-                                <a href="{{route('github.auth')}}" class="btn btn-dark">Login With Github</a>
-                                <a href="#" class="btn btn-danger">Login With google</a>
+                                <a href="{{route('oauth.redirect', ['github'])}}" class="btn btn-dark">Login With Github</a>
+                                <a href="{{route('oauth.redirect', ['google'])}}" class="btn btn-danger">Login With google</a>
+                                <!-- <a href="{{route('oauth.redirect', ['facebook'])}}" class="btn btn-info">Login With Facebook</a> -->
 
                                 @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">

@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public function index()
     {
         // $posts = Post::all();
-        $posts=post::with('user')->paginate(20);
+        $posts = post::with('user')->paginate(20);
         return view('posts.index', [
             'posts' => $posts,
         ]);
@@ -62,9 +63,13 @@ class PostController extends Controller
     public function edit($postId)
     {
         $post = Post::find($postId);
-        return view('posts.edit', [
-            'post' => $post
-        ]);
+        if ($post->user->id == Auth::id()) {
+            return view('posts.edit', [
+                'post' => $post
+            ]);
+        } else {
+            return to_route('posts.index');
+        }
     }
 
     public function update(Request $request, $postId)
@@ -104,10 +109,14 @@ class PostController extends Controller
     public function delete($postId)
     {
         $post = post::find($postId);
-        // File::delete(public_path('images/'.$post['image'])); 
-        Storage::delete(str_replace('storage', 'public', $post->image));
-        post::where('id', $postId)->delete();
-        Comment::where('commentable_id', $postId)->delete();
-        return to_route('posts.index');
+        if ($post->user->id == Auth::id()) {
+            // File::delete(public_path('images/'.$post['image'])); 
+            Storage::delete(str_replace('storage', 'public', $post->image));
+            post::where('id', $postId)->delete();
+            Comment::where('commentable_id', $postId)->delete();
+            return to_route('posts.index');
+        } else {
+            return to_route('posts.index');
+        }
     }
 }

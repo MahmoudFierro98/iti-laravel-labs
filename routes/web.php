@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\OAuthController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
@@ -52,38 +53,11 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 
-    Route::delete('/posts/delete/{post}', [PostController::class, 'delete'])->name('posts.delete');
+    Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('posts.delete');
 
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/auth/redirect', function () {
-    return Socialite::driver('github')->redirect();
-})->name('github.auth');
-
-Route::get('/auth/callback', function () {
-    $githubUser = Socialite::driver('github')->user();
-// dd($githubUser);
-
-    $user = User::where('github_id', $githubUser->id)->first();
-    if ($user) {
-        $user->update([
-            'github_token' => $githubUser->token,
-            'github_refresh_token' => $githubUser->refreshToken,
-        ]);
-    } else {
-        $user = User::create([
-            'name' => $githubUser->name,
-            'email' => $githubUser->email,
-            'password'=>$githubUser->token,
-            'github_id' => $githubUser->id,
-            'github_token' => $githubUser->token,
-            'github_refresh_token' => $githubUser->refreshToken,
-        ]);
-    }
-
-    Auth::login($user);
-
-    return redirect('/posts');
-});
+Route::get('/auth/{provider}/redirect', [OAuthController::class, 'redirect'])->name('oauth.redirect');
+Route::get('/auth/{provider}/callback', [OAuthController::class, 'callback'])->name('oauth.callback');
